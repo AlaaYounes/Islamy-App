@@ -19,17 +19,23 @@ class MyTheme {
           fontSize: 30,
           fontWeight: FontWeight.w700,
           color: blackColor,
-        ),
-        bodyMedium: TextStyle(
-          fontSize: 25,
-          fontWeight: FontWeight.w600,
-          color: blackColor,
-        ),
-        bodySmall: TextStyle(
-          fontWeight: FontWeight.w400,
-          fontSize: 25,
-          color: blackColor,
-        )),
+      ),
+      bodyLarge: TextStyle(
+        fontSize: 25,
+        fontWeight: FontWeight.w600,
+        color: blackColor,
+      ),
+      bodyMedium: TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: 25,
+        color: blackColor,
+      ),
+      bodySmall: TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: 20,
+        color: blackColor,
+      ),
+    ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       // backgroundColor: primaryLight,
       selectedIconTheme: IconThemeData(
