@@ -65,11 +65,11 @@ class _QuranContentState extends State<QuranContent> {
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.width * .01,
-                      vertical: MediaQuery.of(context).size.width * .01),
+                      horizontal: MediaQuery.of(context).size.width * .02,
+                      vertical: MediaQuery.of(context).size.width * .02),
                   child: ListView.builder(
                     itemBuilder: (context, index) => Text(
-                      verses[index],
+                      '${verses[index]}{${index + 1}}',
                       textDirection: TextDirection.rtl,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
