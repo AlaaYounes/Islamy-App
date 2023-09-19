@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:islamy/myTheme.dart';
+import 'package:islamy/providers/app_config_provider.dart';
+import 'package:provider/provider.dart';
 
 class QuranContent extends StatefulWidget {
   String name;
@@ -17,6 +18,7 @@ class _QuranContentState extends State<QuranContent> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
     if (verses.isEmpty) {
       loadAsset();
     } else {
@@ -25,15 +27,15 @@ class _QuranContentState extends State<QuranContent> {
 
     return Stack(
       children: [
-        ThemeMode == MyTheme.lightTheme
+        provider.isDarkMode()
             ? Image.asset(
-                'assets/images/background_light.png',
+                'assets/images/background_dark.png',
                 width: double.infinity,
                 height: double.infinity,
                 fit: BoxFit.fill,
               )
             : Image.asset(
-                'assets/images/background_dark.png',
+          'assets/images/background_light.png',
                 width: double.infinity,
                 height: double.infinity,
                 fit: BoxFit.fill,

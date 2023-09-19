@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:islamy/myTheme.dart';
+import 'package:islamy/providers/app_config_provider.dart';
+import 'package:provider/provider.dart';
 
 class HadethContent extends StatefulWidget {
   String title;
@@ -14,23 +15,23 @@ class HadethContent extends StatefulWidget {
 
 class _HadethContentState extends State<HadethContent> {
   // List<String> verses = [];
-
   @override
   Widget build(BuildContext context) {
     // if (verses.isEmpty) {
     //   loadAsset();
     // }
+    var provider = Provider.of<AppConfigProvider>(context);
     return Stack(
       children: [
-        ThemeMode == MyTheme.lightTheme
+        provider.isDarkMode()
             ? Image.asset(
-                'assets/images/background_light.png',
+                'assets/images/background_dark.png',
                 width: double.infinity,
                 height: double.infinity,
                 fit: BoxFit.fill,
               )
             : Image.asset(
-                'assets/images/background_dark.png',
+                'assets/images/background_light.png',
                 width: double.infinity,
                 height: double.infinity,
                 fit: BoxFit.fill,
