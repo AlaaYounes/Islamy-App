@@ -1,39 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:islamy/myTheme.dart';
 
 class HadethContent extends StatefulWidget {
-  // String name;
-  int index;
+  String title;
+  List<String> content;
 
-  HadethContent({required this.index});
+  HadethContent({required this.title, required this.content});
 
   @override
   State<HadethContent> createState() => _HadethContentState();
 }
 
 class _HadethContentState extends State<HadethContent> {
-  List<String> verses = [];
+  // List<String> verses = [];
 
   @override
   Widget build(BuildContext context) {
-    if (verses.isEmpty) {
-      loadAsset();
-    } else {
-      CircularProgressIndicator();
-    }
-
+    // if (verses.isEmpty) {
+    //   loadAsset();
+    // }
     return Stack(
       children: [
-        Image.asset(
-          'assets/images/background_light.png',
-          width: double.infinity,
-          height: double.infinity,
-          fit: BoxFit.fill,
-        ),
+        ThemeMode == MyTheme.lightTheme
+            ? Image.asset(
+                'assets/images/background_light.png',
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.fill,
+              )
+            : Image.asset(
+                'assets/images/background_dark.png',
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.fill,
+              ),
         Scaffold(
           appBar: AppBar(
             title: Text(
-              'Islami',
+              '${AppLocalizations.of(context)!.app_title}',
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
@@ -41,7 +46,7 @@ class _HadethContentState extends State<HadethContent> {
             children: [
               Center(
                 child: Text(
-                  verses[0],
+                  widget.title,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ),
@@ -57,19 +62,13 @@ class _HadethContentState extends State<HadethContent> {
                   padding: EdgeInsets.symmetric(
                       horizontal: MediaQuery.of(context).size.width * .01,
                       vertical: MediaQuery.of(context).size.width * .01),
-                  child: ListView.builder(
-                    itemBuilder: (context, index) {
-                      return Visibility(
-                        visible: index == 0 ? false : true,
-                        child: Text(
-                          verses[index],
-                          textDirection: TextDirection.rtl,
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                      );
-                    },
-                    itemCount: verses.length,
-                  ),
+                  child: ListView(children: [
+                    Text(
+                      '${widget.content}',
+                      textDirection: TextDirection.rtl,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ]),
                 ),
               ),
             ],
@@ -79,12 +78,12 @@ class _HadethContentState extends State<HadethContent> {
     );
   }
 
-  void loadAsset() async {
-    String content = await rootBundle
-        .loadString('assets/files/ahadeeth/h${widget.index + 1}.txt');
-    List<String> lines = content.split('\n');
-    print(lines);
-    verses = lines;
-    setState(() {});
-  }
+// void loadAsset() async {
+//   String content = await rootBundle
+//       .loadString('assets/files/ahadeeth/h${widget.index + 1}.txt');
+//   List<String> lines = content.split('\n');
+//   print(lines);
+//   verses = lines;
+//   setState(() {});
+// }
 }

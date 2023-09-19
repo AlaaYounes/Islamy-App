@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:islamy/myTheme.dart';
 
 class QuranContent extends StatefulWidget {
   String name;
@@ -24,12 +25,19 @@ class _QuranContentState extends State<QuranContent> {
 
     return Stack(
       children: [
-        Image.asset(
-          'assets/images/background_light.png',
-          width: double.infinity,
-          height: double.infinity,
-          fit: BoxFit.fill,
-        ),
+        ThemeMode == MyTheme.lightTheme
+            ? Image.asset(
+                'assets/images/background_light.png',
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.fill,
+              )
+            : Image.asset(
+                'assets/images/background_dark.png',
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.fill,
+              ),
         Scaffold(
           appBar: AppBar(
             title: Text(
@@ -61,6 +69,7 @@ class _QuranContentState extends State<QuranContent> {
                     itemBuilder: (context, index) => Text(
                       verses[index],
                       textDirection: TextDirection.rtl,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     itemCount: verses.length,
                   ),

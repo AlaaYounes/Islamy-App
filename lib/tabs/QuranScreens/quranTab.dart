@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islamy/tabs/QuranScreens/quranContent.dart';
 
 class QuranTab extends StatelessWidget {
@@ -7,12 +8,10 @@ class QuranTab extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          Expanded(
-              flex: 1,
-              child:
-                  Center(child: Image.asset('assets/images/quran_logo.png'))),
+          Center(child: Image.asset('assets/images/quran_logo.png')),
           Divider(),
-          Text('Surah Name', style: Theme.of(context).textTheme.bodyMedium),
+          Text('${AppLocalizations.of(context)!.surah_name}',
+              style: Theme.of(context).textTheme.bodyMedium),
           Divider(),
           Expanded(
               flex: 3,
