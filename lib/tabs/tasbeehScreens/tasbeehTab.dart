@@ -9,20 +9,49 @@ class TasbeehTab extends StatefulWidget {
 }
 
 class _TasbeehTabState extends State<TasbeehTab> {
+  int counter = 0;
+  String text = 'سبحان الله';
+
   @override
   Widget build(BuildContext context) {
-    int counter = 1;
     var provider = Provider.of<AppConfigProvider>(context);
     return Scaffold(
       body: Center(
         child: Column(
           children: [
-            Image.asset(provider.isDarkMode()
-                ? 'assets/images/head_sebha_dark.png'
-                : 'assets/images/head_sebha_logo.png'),
-            Image.asset(provider.isDarkMode()
-                ? 'assets/images/body_sebha_dark.png'
-                : 'assets/images/body_sebha_logo.png'),
+            InkWell(
+              onTap: () {
+                if (counter >= 132) {
+                  counter = 0;
+                }
+                buildCounter();
+                changeTasbeeh();
+              },
+              child: Transform.rotate(
+                angle: 3.14 * counter / 16.5,
+                child: Stack(
+                  alignment: Alignment.topCenter,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * .1),
+                      child: Image.asset(
+                        provider.isDarkMode()
+                            ? 'assets/images/head_sebha_dark.png'
+                            : 'assets/images/head_sebha_logo.png',
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.width * .2),
+                      child: Image.asset(provider.isDarkMode()
+                          ? 'assets/images/body_sebha_dark.png'
+                          : 'assets/images/body_sebha_logo.png'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             SizedBox(
               height: 20,
             ),
@@ -60,7 +89,7 @@ class _TasbeehTabState extends State<TasbeehTab> {
                 borderRadius: BorderRadius.circular(25),
               ),
               child: Text(
-                'سبحان الله',
+                text,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: provider.isDarkMode()
                         ? MyTheme.yellowColor
@@ -71,5 +100,23 @@ class _TasbeehTabState extends State<TasbeehTab> {
         ),
       ),
     );
+  }
+
+  buildCounter() {
+    counter++;
+    setState(() {});
+  }
+
+  changeTasbeeh() {
+    if (counter <= 33) {
+      text = 'سبحان الله';
+    } else if (counter > 33 && counter <= 66) {
+      text = 'الحمد لله';
+    } else if (counter > 66 && counter <= 99) {
+      text = 'الله أكبر';
+    } else if (counter > 99 && counter <= 132) {
+      text = 'لا اله الا الله';
+    }
+    setState(() {});
   }
 }
